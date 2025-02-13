@@ -1,0 +1,9 @@
+.Header {
+  background-color: #fbd062;
+  height: 100vh;
+  clip-path: polygon(0 0, 100% 0, 100% 80vh, 0 100vh);
+}
+
+.header-row {
+  height: 80vh;
+}
