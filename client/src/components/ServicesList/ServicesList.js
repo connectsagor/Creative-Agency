@@ -2,6 +2,12 @@ import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
 import logo from "../../images/logos/logo.png";
 import { Link } from "react-router";
+import "./ServicesList.css";
+import {
+  PersonCheckFill,
+  PersonRaisedHand,
+  BagPlusFill,
+} from "react-bootstrap-icons";
 
 const defaultData = [
   {
@@ -43,18 +49,24 @@ export default function Table() {
   };
 
   return (
-    <div className="service_list p-4 container-fluid">
+    <div className="service_list container-fluid">
       <div className="row">
-        <div className="col-md-3">
+        <div className="col-md-3 sidebar p-4">
           <img className="w-50" src={logo} alt="logo" />
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
-            <Link>Service List</Link>
-            <Link>Add Service</Link>
-            <Link>Make Admin</Link>
+            <Link to="/service-list">
+              <PersonRaisedHand className="me-2" /> Service List
+            </Link>
+            <Link to="/add-service">
+              <BagPlusFill className="me-2" /> Add Service
+            </Link>
+            <Link to="/make-admin">
+              <PersonCheckFill className="me-2" /> Make Admin
+            </Link>
           </div>
         </div>
-        <div className="col-md-9 ">
+        <div className="col-md-9 p-4">
           <div className="d-flex justify-content-between">
             <h4>Services List</h4>
             <h5 className="me-5">{user && user.displayName.toUpperCase()}</h5>
