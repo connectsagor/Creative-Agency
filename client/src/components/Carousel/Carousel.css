@@ -1,0 +1,13 @@
+.carousel-item {
+  padding: 30px;
+}
+.carousel-main {
+  background-color: #111430;
+}
+
+.img-container-carosel {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 35px;
+}

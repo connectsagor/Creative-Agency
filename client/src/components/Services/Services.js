@@ -25,7 +25,9 @@ const Services = () => {
   return (
     <div className="container my-5">
       <div className="row text-center">
-        <h2 className="mb-5">Provide awesome services</h2>
+        <h2 className="mb-5">
+          Provide awesome <span className="sub-color">services</span>{" "}
+        </h2>
 
         {servicesData.map((service) => {
           return (
