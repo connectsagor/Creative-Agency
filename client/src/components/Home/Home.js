@@ -4,6 +4,7 @@ import Brand from "../Brand/Brand";
 import Services from "../Services/Services";
 import Carousel from "../Carousel/Carousel";
 import Feedback from "../Feedback/Feedback";
+import ContactForm from "../ContactForm/ContactForm";
 
 const Home = () => {
   return (
@@ -13,6 +14,7 @@ const Home = () => {
       <Services />
       <Carousel />
       <Feedback />
+      <ContactForm />
     </>
   );
 };
