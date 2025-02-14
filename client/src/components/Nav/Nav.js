@@ -1,9 +1,25 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./Nav.css";
 import { Link } from "react-router";
 import logo from "../../images/logos/logo.png";
+import { UserContext } from "../../App";
+import { getAuth, signOut } from "firebase/auth";
 
 const Nav = () => {
+  const UserContextInfo = useContext(UserContext);
+  const { loggedIn, setLoggedIn } = UserContextInfo[1];
+
+  const handleLogout = () => {
+    const auth = getAuth();
+    signOut(auth)
+      .then(() => {
+        setLoggedIn(false);
+        sessionStorage.removeItem("user");
+      })
+      .catch((error) => {
+        // An error happened.
+      });
+  };
   return (
     <nav className="navbar navbar-expand-lg">
       <div className="container">
@@ -44,7 +60,18 @@ const Nav = () => {
               </Link>
             </li>
             <li className="nav-item">
-              <button className="nav-link py-2 px-3 primary-btn">Login</button>
+              {loggedIn ? (
+                <Link
+                  onClick={handleLogout}
+                  className="nav-link py-2 px-3 primary-btn"
+                >
+                  Logout
+                </Link>
+              ) : (
+                <Link to="/login" className="nav-link py-2 px-3 primary-btn">
+                  Login
+                </Link>
+              )}
             </li>
           </ul>
         </div>
