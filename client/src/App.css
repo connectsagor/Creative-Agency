@@ -26,3 +26,7 @@
 .sub-color {
   color: #7ab259;
 }
+
+a {
+  text-decoration: none;
+}

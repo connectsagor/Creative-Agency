@@ -5,6 +5,7 @@ import Login from "./components/Login/Login";
 
 import { initializeApp } from "firebase/app";
 import { createContext, useContext, useState } from "react";
+import ServicesList from "./components/ServicesList/ServicesList";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -34,6 +35,7 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
+          <Route path="/services-list" element={<ServicesList />}></Route>
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>
