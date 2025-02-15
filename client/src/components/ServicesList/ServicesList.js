@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ReactDOM from "react-dom/client";
 import logo from "../../images/logos/logo.png";
 import { Link } from "react-router";
@@ -9,26 +9,9 @@ import {
   BagPlusFill,
 } from "react-bootstrap-icons";
 
-const defaultData = [
-  {
-    firstName: "Tanner",
-    lastName: "Linsley",
-    age: 24,
-    visits: 100,
-    status: "Pending",
-  },
-  {
-    firstName: "Tanner",
-    lastName: "Linsley",
-    age: 24,
-    visits: 100,
-    status: "Done",
-  },
-];
-
 export default function Table() {
   const user = JSON.parse(sessionStorage.getItem("user"));
-  const [data, setData] = useState(defaultData);
+  const [data, setData] = useState("");
   const [sortConfig, setSortConfig] = useState({ key: null, direction: "asc" });
 
   const handleSort = (key) => {
@@ -46,6 +29,15 @@ export default function Table() {
     setData(sortedData);
   };
 
+  useEffect(() => {
+    fetch("http://localhost:5000/allUsers")
+      .then((res) => res.json())
+      .then((result) => {
+        setData(result.data);
+      });
+  }, []);
+
+  console.log(data);
   return (
     <div className="service_list container-fluid">
       <div className="row">
@@ -99,15 +91,18 @@ export default function Table() {
                   </tr>
                 </thead>
                 <tbody>
-                  {data.map((row, index) => (
-                    <tr key={index} className="border">
-                      <td className="p-2 ">{row.firstName}</td>
-                      <td className="p-2 ">{row.lastName}</td>
-                      <td className="p-2 ">{row.age}</td>
-                      <td className="p-2">{row.visits}</td>
-                      <td className="p-2 ">{row.status}</td>
-                    </tr>
-                  ))}
+                  {data &&
+                    data.map((row, index) => (
+                      <tr key={index} className="border">
+                        <td className="p-2 ">{row.name}</td>
+                        <td className="p-2 ">{row.email}</td>
+                        <td className="p-2 ">{row.title}</td>
+                        <td className="p-2">{row.description}</td>
+                        <td className="p-2 ">
+                          {row.status ? row.status : "Pending"}
+                        </td>
+                      </tr>
+                    ))}
                 </tbody>
               </table>
             </div>

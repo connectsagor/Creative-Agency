@@ -99,6 +99,26 @@ app.post("/addReview", upload.single("avater"), async (req, res) => {
   }
 });
 
+app.post("/add-service", upload.none(), async (req, res) => {
+  try {
+    const serviceData = req.body;
+
+    const newService = await Order.create(serviceData);
+
+    if (newService) {
+      return res.status(200).json({
+        message: "Service added",
+        insertedCount: 1,
+      });
+    }
+
+    res.status(500).json({ message: "Insertion failed", insertedCount: 0 });
+  } catch (error) {
+    console.error("Error storing order:", error);
+    res.status(500).json({ message: "Server error", insertedCount: 0 });
+  }
+});
+
 app.get("/my-order", async (req, res) => {
   const id = req.query.id;
 
@@ -117,6 +137,24 @@ app.get("/my-order", async (req, res) => {
   } catch (error) {
     console.error("Error getting order:", error);
     res.status(500).json({ message: "Server error", itemsCount: 0 });
+  }
+});
+
+app.get("/allUsers", async (req, res) => {
+  try {
+    const allUser = await Order.find({});
+
+    if (allUser) {
+      return res.status(200).json({
+        message: "all users.",
+        data: allUser,
+      });
+    }
+
+    res.status(500).json({ message: "Retrive failed" });
+  } catch (error) {
+    console.error("Error getting order:", error);
+    res.status(500).json({ message: "Server error" });
   }
 });
 

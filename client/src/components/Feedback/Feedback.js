@@ -1,28 +1,5 @@
 import React, { useEffect, useState } from "react";
 
-const feedbacks = [
-  {
-    id: 1,
-    name: "Nash Patrik",
-    work: "CEO, Manpol",
-    img: "customer-1.png",
-    des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat ",
-  },
-  {
-    id: 2,
-    name: "Miriam Barron",
-    work: "CEO, Manpol",
-    img: "customer-2.png",
-    des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat ",
-  },
-  {
-    id: 3,
-    name: "Bria Malone",
-    work: "CEO, Manpol",
-    img: "customer-3.png",
-    des: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Purus commodo ipsum duis laoreet maecenas. Feugiat ",
-  },
-];
 const Feedback = () => {
   const [review, setReview] = useState("");
 
