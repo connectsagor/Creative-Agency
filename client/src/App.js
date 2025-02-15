@@ -9,6 +9,8 @@ import ServicesList from "./components/ServicesList/ServicesList";
 import Order from "./components/Order/Order";
 import MyService from "./components/Order/MyService";
 import Review from "./components/Order/Review";
+import AddService from "./components/ServicesList/AddService";
+import AddAdmin from "./components/ServicesList/AddAdmin";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -42,6 +44,8 @@ function App() {
           <Route path="/order" element={<Order />}></Route>
           <Route path="/my-service" element={<MyService />}></Route>
           <Route path="/review" element={<Review />}></Route>
+          <Route path="/add-service" element={<AddService />}></Route>
+          <Route path="/make-admin" element={<AddAdmin />}></Route>
         </Routes>
       </BrowserRouter>
     </UserContext.Provider>

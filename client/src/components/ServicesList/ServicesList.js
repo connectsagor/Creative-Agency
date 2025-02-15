@@ -15,16 +15,14 @@ const defaultData = [
     lastName: "Linsley",
     age: 24,
     visits: 100,
-    status: "In Relationship",
-    progress: 50,
+    status: "Pending",
   },
   {
     firstName: "Tanner",
     lastName: "Linsley",
     age: 24,
     visits: 100,
-    status: "In Relationship",
-    progress: 50,
+    status: "Done",
   },
 ];
 
@@ -77,12 +75,11 @@ export default function Table() {
                 <thead>
                   <tr>
                     {[
-                      "firstName",
-                      "lastName",
-                      "age",
-                      "visits",
-                      "status",
-                      "progress",
+                      "Name",
+                      "Email ID",
+                      "Service",
+                      "Project Details",
+                      "Status",
                     ].map((key) => (
                       <th
                         key={key}
@@ -107,7 +104,6 @@ export default function Table() {
                       <td className="p-2 ">{row.age}</td>
                       <td className="p-2">{row.visits}</td>
                       <td className="p-2 ">{row.status}</td>
-                      <td className="p-2 ">{row.progress}%</td>
                     </tr>
                   ))}
                 </tbody>
