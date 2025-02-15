@@ -55,14 +55,14 @@ export default function Table() {
           <img className="w-50" src={logo} alt="logo" />
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
-            <Link to="/service-list">
-              <PersonRaisedHand className="me-2" /> Service List
+            <Link className="d-flex align-items-center" to="/dashboard">
+              <PersonRaisedHand className="me-2" /> <span>Service List</span>
             </Link>
-            <Link to="/add-service">
-              <BagPlusFill className="me-2" /> Add Service
+            <Link className="d-flex align-items-center" to="/add-service">
+              <BagPlusFill className="me-2" /> <span>Add Service</span>
             </Link>
-            <Link to="/make-admin">
-              <PersonCheckFill className="me-2" /> Make Admin
+            <Link className="d-flex align-items-center" to="/make-admin">
+              <PersonCheckFill className="me-2" /> <span>Make Admin</span>
             </Link>
           </div>
         </div>

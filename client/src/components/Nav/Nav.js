@@ -35,14 +35,20 @@ const Nav = () => {
           <span className="navbar-toggler-icon"></span>
         </button>
         <div className="collapse navbar-collapse" id="navbarTogglerDemo01">
-          <Link className="navbar-brand" href="#">
+          <Link to="/" className="navbar-brand">
             <img className="w-25" src={logo} alt="logo" />
           </Link>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
             <li className="nav-item">
-              <Link to="/" className="nav-link active" aria-current="page">
-                Home
-              </Link>
+              {loggedIn ? (
+                <Link to="/dashboard" className="nav-link" aria-current="page">
+                  Dashboard
+                </Link>
+              ) : (
+                <Link to="/" className="nav-link active" aria-current="page">
+                  Home
+                </Link>
+              )}
             </li>
             <li className="nav-item">
               <Link to="/our-portfolio" className="nav-link">
