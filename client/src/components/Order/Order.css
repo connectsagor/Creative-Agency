@@ -1,3 +1,9 @@
 .order-col {
   background-color: #e5e5e5;
 }
+
+.service-img {
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+}

@@ -1,17 +1,56 @@
-import React, { useState } from "react";
+import React, { useRef, useState } from "react";
 import ReactDOM from "react-dom/client";
 import logo from "../../images/logos/logo.png";
 import { Link } from "react-router";
 import "./Order.css";
-import img1 from "../../images/icons/service1.png";
+
 import { BagPlusFill, CartCheckFill, Search } from "react-bootstrap-icons";
 const Review = () => {
+  const fileInputRef = useRef(null);
   const user = JSON.parse(sessionStorage.getItem("user"));
+
+  const [userName, setUserName] = useState("");
+  const [coName, setCoName] = useState("");
+  const [review, setReview] = useState("");
+  const [file, setFile] = useState("");
+
+  const [message, setmessage] = useState("");
+  const [Error, setError] = useState("");
+  const handleAddReview = (e) => {
+    e.preventDefault();
+    const userId = user && user.uid;
+
+    const ReviewForm = new FormData();
+    ReviewForm.append("userName", userName);
+    ReviewForm.append("coName", coName);
+    ReviewForm.append("review", review);
+    ReviewForm.append("avater", file);
+
+    fetch("http://localhost:5000/addReview", {
+      method: "POST",
+      body: ReviewForm,
+    })
+      .then((res) => res.json())
+      .then((result) => {
+        setUserName("");
+        setCoName("");
+        setReview("");
+
+        if (fileInputRef.current) {
+          fileInputRef.current.value = "";
+        }
+        alert("Order confirmed");
+        return setmessage(result);
+      })
+      .catch((err) => setError(err));
+  };
   return (
     <div className="service_list container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar p-4">
-          <img className="w-50" src={logo} alt="logo" />
+          <Link to="/">
+            <img className="w-50" src={logo} alt="logo" />
+          </Link>
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
             <Link className="d-flex align-items-center" to="/order">
@@ -32,8 +71,14 @@ const Review = () => {
           </div>
           <div className="services-info">
             <div className="p-4 shadow-lg mt-3 rounded-1">
-              <form className="w-50" action="">
+              <form
+                onSubmit={handleAddReview}
+                className="w-50"
+                action="/addReview"
+              >
                 <input
+                  onChange={(e) => setUserName(e.target.value)}
+                  value={userName}
                   className="form-control my-2"
                   type="text"
                   name="name"
@@ -41,6 +86,8 @@ const Review = () => {
                   placeholder="Name"
                 />
                 <input
+                  onChange={(e) => setCoName(e.target.value)}
+                  value={coName}
                   className="form-control my-2"
                   type="text"
                   name="co-name"
@@ -48,11 +95,20 @@ const Review = () => {
                   placeholder="Company Name"
                 />
                 <textarea
+                  onChange={(e) => setReview(e.target.value)}
+                  value={review}
                   className="form-control my-2"
                   name="message"
                   id="message"
                   placeholder="Description"
                 ></textarea>
+                <input
+                  ref={fileInputRef}
+                  name="avater"
+                  onChange={(e) => setFile(e.target.files[0])}
+                  type="file"
+                  className="form-control my-2"
+                />
                 <input
                   type="submit"
                   value="Submit"

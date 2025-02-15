@@ -50,7 +50,9 @@ export default function Table() {
     <div className="service_list container-fluid">
       <div className="row">
         <div className="col-md-3 sidebar p-4">
-          <img className="w-50" src={logo} alt="logo" />
+          <Link to="/">
+            <img className="w-50" src={logo} alt="logo" />
+          </Link>
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
             <Link className="d-flex align-items-center" to="/dashboard">
