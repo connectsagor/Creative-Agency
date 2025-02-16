@@ -3,11 +3,8 @@ import ReactDOM from "react-dom/client";
 import logo from "../../images/logos/logo.png";
 import { Link } from "react-router";
 import "./ServicesList.css";
-import {
-  PersonCheckFill,
-  PersonRaisedHand,
-  BagPlusFill,
-} from "react-bootstrap-icons";
+
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function Table() {
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -37,7 +34,6 @@ export default function Table() {
       });
   }, []);
 
-  console.log(data);
   return (
     <div className="service_list container-fluid">
       <div className="row">
@@ -47,15 +43,7 @@ export default function Table() {
           </Link>
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
-            <Link className="d-flex align-items-center" to="/dashboard">
-              <PersonRaisedHand className="me-2" /> <span>Service List</span>
-            </Link>
-            <Link className="d-flex align-items-center" to="/add-service">
-              <BagPlusFill className="me-2" /> <span>Add Service</span>
-            </Link>
-            <Link className="d-flex align-items-center" to="/make-admin">
-              <PersonCheckFill className="me-2" /> <span>Make Admin</span>
-            </Link>
+            <Sidebar />
           </div>
         </div>
         <div className="col-md-9 p-4">
@@ -98,9 +86,7 @@ export default function Table() {
                         <td className="p-2 ">{row.email}</td>
                         <td className="p-2 ">{row.title}</td>
                         <td className="p-2">{row.description}</td>
-                        <td className="p-2 ">
-                          {row.status ? row.status : "Pending"}
-                        </td>
+                        <td className="p-2 ">{row.status}</td>
                       </tr>
                     ))}
                 </tbody>

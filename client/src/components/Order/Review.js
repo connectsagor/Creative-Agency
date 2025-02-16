@@ -4,7 +4,7 @@ import logo from "../../images/logos/logo.png";
 import { Link } from "react-router";
 import "./Order.css";
 
-import { BagPlusFill, CartCheckFill, Search } from "react-bootstrap-icons";
+import Sidebar from "../Sidebar/Sidebar";
 const Review = () => {
   const fileInputRef = useRef(null);
   const user = JSON.parse(sessionStorage.getItem("user"));
@@ -53,15 +53,7 @@ const Review = () => {
           </Link>
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
-            <Link className="d-flex align-items-center" to="/order">
-              <CartCheckFill className="me-2" /> <span>Order</span>
-            </Link>
-            <Link className="d-flex align-items-center" to="/my-service">
-              <BagPlusFill className="me-2" /> <span>My Services</span>
-            </Link>
-            <Link className="d-flex align-items-center" to="/review">
-              <Search className="me-2" /> <span>Review</span>
-            </Link>
+            <Sidebar />
           </div>
         </div>
         <div className="col-md-9 p-4 order-col">

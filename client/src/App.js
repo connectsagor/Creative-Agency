@@ -28,20 +28,22 @@ export const UserContext = createContext();
 function App() {
   const [user, setUser] = useState(null);
   const [loggedIn, setLoggedIn] = useState(false);
+  const [Isadmin, setIsAdmin] = useState(false);
 
   return (
     <UserContext.Provider
       value={[
         { user, setUser },
         { loggedIn, setLoggedIn },
+        { Isadmin, setIsAdmin },
       ]}
     >
       <BrowserRouter>
         <Routes>
           <Route exact path="/" element={<Home />}></Route>
           <Route path="/login" element={<Login />}></Route>
-          <Route path="/dashboard" element={<ServicesList />}></Route>
-          <Route path="/order" element={<Order />}></Route>
+          <Route path="/admin" element={<ServicesList />}></Route>
+          <Route path="/user" element={<Order />}></Route>
           <Route path="/my-service" element={<MyService />}></Route>
           <Route path="/review" element={<Review />}></Route>
           <Route path="/add-service" element={<AddService />}></Route>

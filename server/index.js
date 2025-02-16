@@ -33,6 +33,14 @@ const OrderSchema = new mongoose.Schema({
   description: String,
   price: String,
   image: String,
+  role: {
+    type: String,
+    default: "user",
+  },
+  status: {
+    type: String,
+    default: "Pending",
+  },
 });
 const ReviewSchema = new mongoose.Schema({
   userName: String,
@@ -174,6 +182,41 @@ app.get("/reviews", async (req, res) => {
   } catch (error) {
     console.error("Error getting order:", error);
     res.status(500).json({ message: "Server error", itemsCount: 0 });
+  }
+});
+
+app.patch("/add-admin", async (req, res) => {
+  try {
+    const email = req.body.email;
+
+    const updatedUser = await Order.findOneAndUpdate(
+      { email: email },
+      { role: "admin" },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    res.json({ message: "User set as admin", user });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
+  }
+});
+
+app.get("/is-admin/:email", async (req, res) => {
+  const email = req.params.email;
+  try {
+    const user = await Order.findOne({ email });
+
+    if (user && user.role === "admin") {
+      return res.json({ isAdmin: true });
+    }
+
+    res.json({ isAdmin: false });
+  } catch (error) {
+    res.status(500).json({ message: "Server error", error });
   }
 });
 

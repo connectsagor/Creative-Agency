@@ -3,15 +3,26 @@ import ReactDOM from "react-dom/client";
 import logo from "../../images/logos/logo.png";
 import { Link } from "react-router";
 import "./ServicesList.css";
-import {
-  PersonCheckFill,
-  PersonRaisedHand,
-  BagPlusFill,
-} from "react-bootstrap-icons";
+
+import Sidebar from "../Sidebar/Sidebar";
 
 export default function AddAdmin() {
   const user = JSON.parse(sessionStorage.getItem("user"));
+  const [email, setEmail] = useState("");
 
+  const handleAddAdmin = (e) => {
+    e.preventDefault();
+
+    fetch("http://localhost:5000/add-admin", {
+      method: "PATCH",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({ email }),
+    })
+      .then((res) => res.json())
+      .then((result) => alert("Requested as an admin"));
+  };
   return (
     <div className="service_list container-fluid">
       <div className="row">
@@ -21,15 +32,7 @@ export default function AddAdmin() {
           </Link>
 
           <div className="services_buttons d-flex flex-column gap-3 mt-4">
-            <Link className="d-flex align-items-center" to="/dashboard">
-              <PersonRaisedHand className="me-2" /> <span>Service List</span>
-            </Link>
-            <Link className="d-flex align-items-center" to="/add-service">
-              <BagPlusFill className="me-2" /> <span>Add Service</span>
-            </Link>
-            <Link className="d-flex align-items-center" to="/make-admin">
-              <PersonCheckFill className="me-2" /> <span>Make Admin</span>
-            </Link>
+            <Sidebar />
           </div>
         </div>
         <div className="col-md-9 p-4">
@@ -39,9 +42,11 @@ export default function AddAdmin() {
           </div>
           <div className="services-info">
             <div className="p-4 shadow-lg">
-              <form action="">
+              <form onSubmit={handleAddAdmin} action="/add-admin">
                 <div className="form-wrap d-flex w-50 my-4">
                   <input
+                    onChange={(e) => setEmail(e.target.value)}
+                    value={email}
                     type="email"
                     placeholder="Email"
                     className="form-control w-75"
